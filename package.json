@@ -1,0 +1,70 @@
+{
+  "name": "electron-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "generate-v8-snapshots": "node ./tools/create-v8-snapshots.js",
+    "copy-v8-snapshots": "node tools/copy-snapshot-bin-to-electron.js"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@electron/remote": "^2.1.1",
+    "ant-design-vue": "^4.0.8",
+    "axios": "^1.6.3",
+    "chmodr": "^1.2.0",
+    "core-js": "^3.8.3",
+    "download": "^8.0.0",
+    "electron-builder": "23.0.2",
+    "electron-link": "^0.6.0",
+    "electron-mksnapshot": "^27.2.0",
+    "lodash": "^4.17.21",
+    "original-fs": "^1.2.0",
+    "pinyin-match": "^1.2.5",
+    "plist": "^3.1.0",
+    "react": "^18.2.0",
+    "request": "^2.88.2",
+    "simple-plist": "^1.3.1",
+    "v8-compile-cache": "^2.4.0",
+    "vue": "^3.3.13",
+    "webdav": "^5.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "electron": "27.1.3",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-electron-builder": "3.0.0-alpha.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
