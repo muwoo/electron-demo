@@ -9,9 +9,7 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "generate-v8-snapshots": "node ./tools/create-v8-snapshots.js",
-    "copy-v8-snapshots": "node tools/copy-snapshot-bin-to-electron.js"
+    "postuninstall": "electron-builder install-app-deps"
   },
   "main": "index.js",
   "dependencies": {
