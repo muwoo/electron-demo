@@ -5,8 +5,11 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-import WindowManager from "./window-manager";
-
+// const isTest = process.env.NODE_ENV === 'test'
+// console.log(process.env.NODE_ENV)
+// if (isTest) {
+//   require('wdio-electron-service/main');
+// }
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -44,11 +47,10 @@ async function createWindow() {
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
+  console.log(123123)
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
 app.on('activate', () => {
@@ -67,7 +69,6 @@ app.on('ready', async () => {
     }
   }
   createWindow();
-  new WindowManager().init();
 })
 
 // Exit cleanly on request from parent process in development mode.
