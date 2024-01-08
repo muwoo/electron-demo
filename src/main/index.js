@@ -5,11 +5,6 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-// const isTest = process.env.NODE_ENV === 'test'
-// console.log(process.env.NODE_ENV)
-// if (isTest) {
-//   require('wdio-electron-service/main');
-// }
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -84,4 +79,35 @@ if (isDevelopment) {
       app.quit()
     })
   }
+}
+
+const METHODS = {
+  isReady () {
+    // 进行任何需要的初始化
+    return true
+  },
+  getAppName () {
+    return app.getName();
+  }
+  // 在这里定义可做 RPC 调用的方法
+}
+
+const onMessage = async ({ msgId, cmd, args }) => {
+  let method = METHODS[cmd]
+  if (!method) method = () => new Error('Invalid method: ' + cmd)
+  try {
+    const resolve = await method(...args)
+    process.send({ msgId, resolve })
+  } catch (err) {
+    const reject = {
+      message: err.message,
+      stack: err.stack,
+      name: err.name
+    }
+    process.send({ msgId, reject })
+  }
+}
+
+if (process.env.APP_TEST_DRIVER) {
+  process.on('message', onMessage)
 }
